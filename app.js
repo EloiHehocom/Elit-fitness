@@ -54,5 +54,5 @@ app.listen(port, () => {
   console.log(`Middleware HighLevel-Heinz écoute sur http://localhost:${port}`);
   console.log(`Endpoint Webhook : http://localhost:${port}/webhook/highlevel-booking`);
   console.log(`N'oubliez pas de configurer ce webhook dans votre workflow HighLevel !`);
-  syncHeinzToHighLevel();
+  // syncHeinzToHighLevel();
 });
