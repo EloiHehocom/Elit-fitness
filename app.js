@@ -1,4 +1,3 @@
-// app.js
 
 // Charge les variables d'environnement depuis le fichier .env
 require('dotenv').config();
@@ -9,9 +8,14 @@ const app = express();
 const port = process.env.PORT || 3000; 
 
 const syncHeinzToHighLevel = require('./services/syncScheduler'); 
+// app.js
+const appointmentRoutes = require('./routes/appointments');
 
 // Middleware Express pour analyser les corps de requêtes JSON (très important pour les webhooks)
 app.use(express.json());
+
+
+app.use('/appointments', appointmentRoutes);
 
 // --- Endpoint de Vérification de Santé (Health Check) ---
 // Une simple route GET pour vérifier que le serveur est bien démarré.

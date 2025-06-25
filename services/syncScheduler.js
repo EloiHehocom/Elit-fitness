@@ -46,9 +46,26 @@ async function syncHeitzToHighLevel() {
                 });
 
                 if (existingEvent) {
-                    await updateAppointment(existingEvent.id, heitzSlot);
-                    updated++;
-                    console.log(`Créneau mis à jour: ${heitzSlot.activity}`);
+                    // Vérifier si une mise à jour est nécessaire
+                    const expectedTitle = `${heitzSlot.activity} [ID:${heitzSlot.id}]`;
+                    const placesDisponibles = heitzSlot.placesMax - heitzSlot.placesTaken;
+                    const expectedNotes = `Cours : ${heitzSlot.activity}\nSalle : ${heitzSlot.room}\nPlaces disponibles : ${placesDisponibles}/${heitzSlot.placesMax}\nID Heitz: ${heitzSlot.id}`;
+
+                    const hasChanged = 
+                        existingEvent.title !== expectedTitle ||
+                        existingEvent.startTime !== heitzSlot.start ||
+                        existingEvent.endTime !== heitzSlot.end ||
+                        existingEvent.location !== heitzSlot.room ||
+                        existingEvent.notes !== expectedNotes;
+
+                    if (hasChanged) {
+                        await updateAppointment(existingEvent.id, heitzSlot);
+                        updated++;
+                        console.log(`Créneau mis à jour: ${heitzSlot.activity}`);
+                    } else {
+                        // Optionnel: décommenter pour voir les créneaux qui n'ont pas changé
+                        // console.log(`Créneau inchangé, mise à jour ignorée: ${heitzSlot.activity}`);
+                    }
                 } else {
                     await createAppointment(heitzSlot);
                     created++;

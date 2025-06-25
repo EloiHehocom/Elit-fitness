@@ -30,6 +30,19 @@ async function getAllAppointments(params = {}) {
         headers: config.headers
     };
 
+    // const accessToken = await getValidAccessToken();
+
+    // const options = {
+    //     method: 'GET',
+    //     url: `${config.BASE_URL}/calendars/events`,
+    //     params: finalParams,
+    //     headers: {
+    //         'Authorization': `Bearer ${accessToken}`,
+    //         'Version': '2021-04-15',
+    //         'Accept': 'application/json'
+    //     }
+    // };
+
     try {
         const { data } = await axios.request(options);
         return data.events || [];

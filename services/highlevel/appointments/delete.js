@@ -17,6 +17,7 @@ async function deleteAppointment(eventId) {
         headers: config.headers
     };
 
+
     try {
         const { data } = await axios.request(options);
         console.log(`Rendez-vous supprimé avec succès: ${eventId}`);

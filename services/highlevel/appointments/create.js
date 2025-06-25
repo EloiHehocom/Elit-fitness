@@ -28,6 +28,20 @@ async function createAppointment(params = {}, isHeitzSlot = true) {
         data: appointmentData
     };
 
+    // const accessToken = await getValidAccessToken();
+
+    // const options = {
+    //     method: 'POST',
+    //     url: `${config.BASE_URL}/calendars/events/appointments`,
+    //     headers: {
+    //         'Authorization': `Bearer ${accessToken}`,
+    //         'Version': '2021-04-15',
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/json'
+    //     },
+    //     data: appointmentData
+    // };
+
     try {
         const { data } = await axios.request(options);
         console.log(`Rendez-vous créé avec succès: ${appointmentData.title}`);
